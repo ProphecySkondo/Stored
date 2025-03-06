@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to Kurrent</title>
   <style>
     /* Base Styles */
     body {
       margin: 0;
-      background-color: #000; /* Black background */
+      background-color: #000;
       overflow: hidden;
       cursor: none; /* Hide default cursor */
       font-family: Arial, sans-serif;
@@ -36,7 +36,6 @@
       background-color: #fff;
       border-radius: 50%;
       pointer-events: none;
-      /* Center the element relative to its left/top */
       transform: translate(-50%, -50%);
       transition: left 0.05s linear, top 0.05s linear;
       z-index: 10000;
@@ -55,6 +54,23 @@
       transition: left 0.05s linear, top 0.05s linear;
       z-index: 9999;
     }
+    
+    /* Box Styles */
+    .box {
+      width: 300px;
+      padding: 20px;
+      margin: 20px auto;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    }
   </style>
 </head>
 <body>
@@ -65,17 +81,20 @@
   <div class="cursor-glow" id="cursorGlow"></div>
   <div class="custom-cursor" id="customCursor"></div>
   
+  <!-- Your new boxes -->
+  <div class="box">Box 1: Hover over me!</div>
+  <div class="box">Box 2: Hover over me too!</div>
+  
   <script>
-    // Grab both elements
+    // Grab both custom cursor elements
     const cursor = document.getElementById('customCursor');
     const glow = document.getElementById('cursorGlow');
     
-    // Update the positions of both elements on mousemove
+    // Update positions on mousemove
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX;
       const y = e.clientY;
       
-      // Set left and top to position the elements with center alignment
       cursor.style.left = x + 'px';
       cursor.style.top = y + 'px';
       glow.style.left = x + 'px';
