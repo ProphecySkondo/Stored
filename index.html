@@ -164,32 +164,32 @@
       z-index: 9999;
     }
     
-    /* Box Container (Main Page) */
-    .box-container {
+.box-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px; /* Increase gap slightly for better spacing */
-  margin: 20px auto;
-  width: 70%;
-  height: 20vh; /* Increase height for taller boxes */
+  gap: 5px; /* Reduce gap for closer boxes */
+  margin: 10px auto;
+  width: 90%;
+  height: 20vh; /* Decrease height */
 }
 
-    .box {
+.box {
   flex: 1;
-  min-width: 400px; /* Increase width */
-  min-height: 300px; /* Increase height */
+  min-width: 250px; /* Smaller width */
+  min-height: 150px; /* Smaller height */
   border: 2px solid #201d1d;
   border-radius: 15px;
   background-color: #111;
   color: #fff;
-  padding: 20px; /* Slightly increase padding */
+  padding: 10px; /* Reduce padding */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 
     .box:hover {
       transform: translateY(-5px);
