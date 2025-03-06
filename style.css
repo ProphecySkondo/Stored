@@ -66,7 +66,7 @@ body {
   display: block;
 }
 
-/* Button Container */
+/* Button Container (Hero Section) */
 .button-container {
   display: flex;
   flex-wrap: wrap;
@@ -77,6 +77,31 @@ body {
   border: 2px solid #fff;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* New Sections: Active Scripts & Projects */
+.active-scripts, .projects {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  text-align: center;
+  background: var(--container-bg);
+  padding: 20px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.active-scripts h2, .projects h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.section-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 /* Button Styles */
@@ -93,8 +118,14 @@ button {
   opacity: 0; /* Initially hidden for fade-in */
 }
 
+/* Adjust buttons in section-buttons (for new sections) */
+.section-buttons button {
+  padding: 15px 30px;
+  font-size: 1rem;
+}
+
 /* Button Hover Effect */
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -117,7 +148,7 @@ button:hover {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .button-container {
+  .button-container, .section-buttons {
     flex-direction: column;
     gap: 15px;
   }
