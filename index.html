@@ -36,7 +36,7 @@
       }
     }
     
-    /* Top Left Brand Logo */
+    /* Brand Logo (Top Left) */
     .brand-logo {
       position: fixed;
       top: 10px;
@@ -45,7 +45,7 @@
       cursor: pointer;
     }
     .brand-logo img {
-      width: 80px; /* Adjust size as desired */
+      width: 80px;
       transition: transform 0.2s ease;
     }
     .brand-logo img:hover {
@@ -58,6 +58,7 @@
       top: 10px;
       right: 20px;
       display: flex;
+      align-items: center;
       gap: 10px;
       z-index: 40000;
     }
@@ -68,12 +69,21 @@
       cursor: pointer;
       transition: transform 0.2s ease;
       text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+      margin-right: 10px;
     }
     .nav-top a:hover {
       transform: translateY(-2px);
     }
+    .nav-top .social-link img {
+      width: 40px;
+      transition: transform 0.2s ease;
+      filter: drop-shadow(0 0 5px currentColor);
+    }
+    .nav-top .social-link img:hover {
+      transform: translateY(-2px);
+    }
     
-    /* Intro Overlay (Animated Intro) */
+    /* Intro Overlay */
     #introOverlay {
       position: fixed;
       top: 0;
@@ -159,8 +169,8 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 5px;
-      margin: 5px auto;
+      gap: 10px;
+      margin: 10px auto;
       width: 90%;
       height: 35vh;
     }
@@ -182,12 +192,11 @@
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
     .box h3 {
-      margin: 0;
+      margin: 0 0 10px 0;
       font-size: 1.8rem;
-      margin-bottom: 8px;
     }
     .box p {
-      margin: 0;
+      margin: 10px 0 0 0;
       font-size: 1rem;
       text-align: center;
     }
@@ -203,36 +212,6 @@
       height: 450px;
       border: none;
       border-radius: 10px;
-    }
-    
-    /* Text Links (Main Page) */
-    .text-links {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      margin: 5px auto;
-    }
-    /* Image Links for Discord and Youtube */
-    .link-image img {
-      width: 50px;
-      height: auto;
-      transition: transform 0.2s ease;
-      filter: drop-shadow(0 0 5px currentColor);
-    }
-    .link-image img:hover {
-      transform: translateY(-3px);
-    }
-    /* Help as text link remains */
-    .text-link {
-      font-size: 2rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
-      color: #ff8c00;
-    }
-    .text-link:hover {
-      transform: translateY(-3px);
     }
     
     /* FScripts Page Content */
@@ -258,9 +237,8 @@
       text-align: center;
     }
     .fScripts-section h2 {
-      margin: 0;
+      margin: 0 0 10px 0;
       font-size: 2rem;
-      margin-bottom: 10px;
     }
     .fScripts-buttons {
       display: flex;
@@ -282,20 +260,46 @@
       transform: translateY(-3px);
       box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
     }
+    
+    /* Help Page Content */
+    #helpPage {
+      display: none;
+      padding: 20px;
+      position: relative;
+      z-index: 1000;
+      color: #fff;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #fff;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
-  <!-- Animated Bubble Background (Bubbles will be created via JS) -->
+  <!-- Animated Bubble Background (Bubbles are generated via JS) -->
   
   <!-- Brand Logo (Top Left) -->
   <div class="brand-logo" id="brandLogo">
     <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo">
   </div>
   
-  <!-- Top Right Navigation -->
+  <!-- Top Right Navigation (Main, FScripts, Help + Social Icons) -->
   <div class="nav-top">
     <a id="navMain">Main</a>
     <a id="navFScripts">FScripts</a>
+    <a id="navHelp">Help</a>
+    <a href="https://discord.gg/tuc4hUd7qx" class="social-link" target="_blank">
+      <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png" alt="Discord">
+    </a>
+    <a href="https://www.youtube.com/@BandzONTOP" class="social-link" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="Youtube">
+    </a>
   </div>
   
   <!-- Intro Overlay -->
@@ -328,17 +332,6 @@
     <div class="video-container">
       <iframe src="YOUR_VIDEO_LINK_HERE" allowfullscreen></iframe>
     </div>
-    
-    <!-- Text Links (Discord, Youtube, Help) -->
-    <div class="text-links">
-      <a href="https://discord.gg/tuc4hUd7qx" class="link-image discord">
-        <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png" alt="Discord">
-      </a>
-      <a href="https://www.youtube.com/@BandzONTOP" class="link-image youtube">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="Youtube">
-      </a>
-      <a href="javascript:void(0);" class="text-link help" id="helpLink">Help</a>
-    </div>
   </div>
   
   <!-- FScripts Page Content -->
@@ -361,21 +354,28 @@
     </div>
   </div>
   
+  <!-- Help Page Content -->
+  <div id="helpPage">
+    <h2>Help Menu</h2>
+    <p>Here you can find FAQs, contact information, and support resources to help you with our products and services.</p>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    "I love these scripts" - Drilly
+  </footer>
+  
   <script>
     // Create floating bubbles
     function createBubble() {
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      // Random size between 10 and 50px
-      const size = Math.random() * 40 + 10;
+      const size = Math.random() * 40 + 10; // Random size between 10 and 50px
       bubble.style.width = size + 'px';
       bubble.style.height = size + 'px';
-      // Random horizontal position (viewport width)
       bubble.style.left = Math.random() * window.innerWidth + 'px';
-      // Random animation duration between 4 and 8 seconds
       bubble.style.animationDuration = (Math.random() * 4 + 4) + 's';
       document.body.appendChild(bubble);
-      // Remove bubble after animation completes
       setTimeout(() => {
         bubble.remove();
       }, parseFloat(bubble.style.animationDuration) * 1000);
@@ -405,15 +405,25 @@
     // Navigation between pages
     const navMain = document.getElementById('navMain');
     const navFScripts = document.getElementById('navFScripts');
+    const navHelp = document.getElementById('navHelp');
     const mainPage = document.getElementById('mainPage');
     const fScriptsPage = document.getElementById('fScriptsPage');
+    const helpPage = document.getElementById('helpPage');
+    
     navMain.addEventListener('click', () => {
       mainPage.style.display = 'block';
       fScriptsPage.style.display = 'none';
+      helpPage.style.display = 'none';
     });
     navFScripts.addEventListener('click', () => {
       mainPage.style.display = 'none';
       fScriptsPage.style.display = 'block';
+      helpPage.style.display = 'none';
+    });
+    navHelp.addEventListener('click', () => {
+      mainPage.style.display = 'none';
+      fScriptsPage.style.display = 'none';
+      helpPage.style.display = 'block';
     });
     
     // Brand logo click returns to main page
@@ -421,14 +431,7 @@
     brandLogo.addEventListener('click', () => {
       mainPage.style.display = 'block';
       fScriptsPage.style.display = 'none';
-    });
-    
-    // (Optional) Reopen intro overlay if Help is clicked on Main Page
-    const helpLink = document.getElementById('helpLink');
-    helpLink.addEventListener('click', () => {
-      const introOverlay = document.getElementById('introOverlay');
-      introOverlay.style.display = 'flex';
-      introOverlay.style.animation = 'introAnim 3s ease forwards';
+      helpPage.style.display = 'none';
     });
   </script>
 </body>
