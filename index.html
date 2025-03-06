@@ -166,27 +166,31 @@
     
     /* Box Container (Main Page) */
     .box-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 10px auto;
-      width: 90%;
-      height: 35vh;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px; /* Increase gap slightly for better spacing */
+  margin: 20px auto;
+  width: 90%;
+  height: 50vh; /* Increase height for taller boxes */
+}
+
     .box {
-      flex: 1;
-      border: 2px solid #201d1d;
-      border-radius: 15px;
-      background-color: #111;
-      color: #fff;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+  flex: 1.5;
+  min-width: 500px; /* Increase width */
+  min-height: 350px; /* Increase height */
+  border: 2px solid #201d1d;
+  border-radius: 15px;
+  background-color: #111;
+  color: #fff;
+  padding: 20px; /* Slightly increase padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
     .box:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
