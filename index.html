@@ -28,7 +28,7 @@
         0 0 50px #fff;
     }
     
-    /* Custom Cursor (Small Circle) */
+    /* Custom Cursor Elements */
     .custom-cursor {
       position: fixed;
       width: 8px;
@@ -41,7 +41,6 @@
       z-index: 10000;
     }
     
-    /* Glowing Aura */
     .cursor-glow {
       position: fixed;
       width: 50px;
@@ -55,21 +54,69 @@
       z-index: 9999;
     }
     
-    /* Box Styles */
+    /* Box Container for Two Large Boxes */
+    .box-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      width: 100%;
+      height: 50vh; /* Half of the viewport height */
+    }
+    
+    /* Boxes */
     .box {
-      width: 300px;
-      padding: 20px;
-      margin: 20px auto;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      background-color: #222;
+      width: 45%;
+      height: 80%;
+      margin: 0 2.5%;
+      border: 2px solid #444;
+      border-radius: 15px;
+      background-color: #111;
       color: #fff;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    
     .box:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Text Links Container */
+    .text-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+    }
+    
+    /* Text Links */
+    .text-link {
+      font-size: 2rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, text-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .text-link:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px currentColor;
+    }
+    
+    /* Specific Colors for Each Link */
+    .discord {
+      color: #7289da;
+    }
+    
+    .youtube {
+      color: #ff0000;
+    }
+    
+    .help {
+      color: #ff8c00;
     }
   </style>
 </head>
@@ -81,20 +128,27 @@
   <div class="cursor-glow" id="cursorGlow"></div>
   <div class="custom-cursor" id="customCursor"></div>
   
-  <!-- Your new boxes -->
-  <div class="box">Box 1: Hover over me!</div>
-  <div class="box">Box 2: Hover over me too!</div>
+  <!-- Box Container with Two Large Boxes -->
+  <div class="box-container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+  </div>
+  
+  <!-- Clickable Text Links -->
+  <div class="text-links">
+    <a href="https://discord.com" class="text-link discord">Discord</a>
+    <a href="https://youtube.com" class="text-link youtube">Youtube</a>
+    <a href="#" class="text-link help">Help</a>
+  </div>
   
   <script>
-    // Grab both custom cursor elements
+    // Custom Cursor Functionality
     const cursor = document.getElementById('customCursor');
     const glow = document.getElementById('cursorGlow');
     
-    // Update positions on mousemove
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX;
       const y = e.clientY;
-      
       cursor.style.left = x + 'px';
       cursor.style.top = y + 'px';
       glow.style.left = x + 'px';
