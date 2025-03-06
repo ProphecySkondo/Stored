@@ -1,7 +1,7 @@
 /* Define CSS variables for a consistent design */
 :root {
-  --primary-color: #FF8C00;   /* Dark Orange */
-  --secondary-color: #FFD580; /* Light Orange */
+  --primary-color: #ff5608;   /* Dark Orange */
+  --secondary-color: #ff5608; /* Light Orange */
   --container-bg: rgba(255, 255, 255, 0.8);
   --button-bg: #ffffff;
   --button-border: #333;
