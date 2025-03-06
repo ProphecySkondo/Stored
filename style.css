@@ -1,12 +1,13 @@
 /* Define CSS variables for a consistent design */
 :root {
-  --primary-color: #ff9a9e;
-  --secondary-color: #fad0c4;
+  --primary-color: #FF8C00;   /* Dark Orange */
+  --secondary-color: #FFD580; /* Light Orange */
   --container-bg: rgba(255, 255, 255, 0.8);
   --button-bg: #ffffff;
   --button-border: #333;
   --font-family: 'Montserrat', sans-serif;
 }
+
 
 /* Global Styles */
 * {
