@@ -10,8 +10,29 @@
       margin: 0;
       background-color: #000;
       overflow-x: hidden;
-      cursor: none; /* Hide default cursor */
+      cursor: none;
       font-family: Arial, sans-serif;
+    }
+    
+    /* Top Right Navigation */
+    .nav-top {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 40000;
+    }
+    .nav-top a {
+      font-size: 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+    }
+    .nav-top a:hover {
+      transform: translateY(-2px);
     }
     
     /* Intro Overlay */
@@ -29,7 +50,6 @@
       z-index: 30000;
       animation: introAnim 3s ease forwards;
     }
-    /* Keyframes for Intro Animation */
     @keyframes introAnim {
       0% {
         opacity: 1;
@@ -44,38 +64,32 @@
         transform: translateY(100%);
       }
     }
-    /* Logo within Intro */
     .intro-logo {
       width: 200px;
       margin-bottom: 20px;
     }
-    /* Bold Title in Intro */
     .intro-title {
       color: #fff;
       font-size: 3rem;
       font-weight: bold;
       text-align: center;
-      text-shadow: 
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
     }
     
-    /* Glowing Title for Main Site */
+    /* Main Page Content */
+    #mainPage {
+      display: block;
+      padding-bottom: 20px;
+    }
     .welcome-text {
       color: #fff;
       font-size: 4rem;
       text-align: center;
       margin-top: 10px;
-      text-shadow: 
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 40px #fff,
-        0 0 50px #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff;
     }
     
-    /* Custom Cursor Elements */
+    /* Custom Cursor */
     .custom-cursor {
       position: fixed;
       width: 8px;
@@ -100,7 +114,7 @@
       z-index: 9999;
     }
     
-    /* Box Container */
+    /* Box Container & Boxes (Main Page) */
     .box-container {
       display: flex;
       justify-content: center;
@@ -110,7 +124,6 @@
       width: 90%;
       height: 35vh;
     }
-    /* Individual Box */
     .box {
       flex: 1;
       border: 2px solid #201d1d;
@@ -128,7 +141,6 @@
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
-    /* Box Content */
     .box h3 {
       margin: 0;
       font-size: 1.8rem;
@@ -140,7 +152,7 @@
       text-align: center;
     }
     
-    /* Video Embed Container */
+    /* Video Embed (Main Page) */
     .video-container {
       width: 90%;
       max-width: 800px;
@@ -153,81 +165,142 @@
       border-radius: 10px;
     }
     
-    /* Text Links Container */
+    /* Text Links (Main Page) */
     .text-links {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin: 10px auto;
     }
-    /* Text Links with Glow */
     .text-link {
       font-size: 2rem;
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.2s ease;
-      text-shadow: 
-        0 0 10px currentColor,
-        0 0 20px currentColor,
-        0 0 30px currentColor;
+      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
     }
     .text-link:hover {
       transform: translateY(-3px);
     }
-    /* Specific Colors for Each Link */
-    .discord {
-      color: #7289da;
+    .discord { color: #7289da; }
+    .youtube { color: #ff0000; }
+    .help { color: #ff8c00; }
+    
+    /* FScripts Page Content */
+    #fScriptsPage {
+      display: none;
+      padding-bottom: 20px;
     }
-    .youtube {
-      color: #ff0000;
+    .fScripts-container {
+      width: 90%;
+      margin: 10px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    .help {
-      color: #ff8c00;
+    .fScripts-section {
+      background-color: #111;
+      padding: 20px;
+      border: 2px solid #201d1d;
+      border-radius: 15px;
+      color: #fff;
+      text-align: center;
+    }
+    .fScripts-section h2 {
+      margin: 0;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .fScripts-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .fs-button {
+      background-color: #222;
+      border: 2px solid #444;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .fs-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
   <!-- Intro Overlay -->
   <div id="introOverlay">
-    <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo" class="intro-logo" />
+    <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo" class="intro-logo">
     <div class="intro-title">Welcome to Kurrent</div>
   </div>
   
-  <!-- Main Content -->
-  <!-- Glowing Title -->
-  <div class="welcome-text">Welcome to Kurrent</div>
+  <!-- Top Right Navigation -->
+  <div class="nav-top">
+    <a id="navMain">Main</a>
+    <a id="navFScripts">FScripts</a>
+  </div>
   
-  <!-- Custom Cursor Elements -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="custom-cursor" id="customCursor"></div>
-  
-  <!-- Box Container with Two Boxes -->
-  <div class="box-container">
-    <div class="box">
-      <h3>What Do We Do?</h3>
-      <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
+  <!-- Main Page Content -->
+  <div id="mainPage">
+    <div class="welcome-text">Welcome to Kurrent</div>
+    
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="custom-cursor" id="customCursor"></div>
+    
+    <!-- Box Container -->
+    <div class="box-container">
+      <div class="box">
+        <h3>What Do We Do?</h3>
+        <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
+      </div>
+      <div class="box">
+        <h3>How Do We Do This?</h3>
+        <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
+      </div>
     </div>
-    <div class="box">
-      <h3>How Do We Do This?</h3>
-      <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
+    
+    <!-- Video Embed -->
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/dITg5h_pM0w" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Text Links -->
+    <div class="text-links">
+      <a href="https://discord.gg/tuc4hUd7qx" class="text-link discord">Discord</a>
+      <a href="https://www.youtube.com/@BandzONTOP" class="text-link youtube">Youtube</a>
+      <a href="#" class="text-link help" id="helpLink">Help</a>
     </div>
   </div>
   
-  <!-- Video Embed -->
-  <div class="video-container">
-    <!-- Replace YOUR_VIDEO_LINK_HERE with your actual video embed link -->
-    <iframe src="https://www.youtube.com/watch?v=dITg5h_pM0w" allowfullscreen></iframe>
-  </div>
-  
-  <!-- Text Links -->
-  <div class="text-links">
-    <a href="https://discord.gg/tuc4hUd7qx" class="text-link discord">Discord</a>
-    <a href="https://www.youtube.com/@BandzONTOP" class="text-link youtube">Youtube</a>
-    <a href="#" class="text-link help" id="helpLink">Help</a>
+  <!-- FScripts Page Content -->
+  <div id="fScriptsPage">
+    <div class="welcome-text" style="font-size: 3rem; margin-top: 10px;">FScripts Menu</div>
+    <div class="fScripts-container">
+      <div class="fScripts-section">
+        <h2>Active Scripts</h2>
+        <div class="fScripts-buttons">
+          <button class="fs-button" onclick="window.open('https://example.com/script1','_blank')">Script 1</button>
+          <button class="fs-button" onclick="window.open('https://example.com/script2','_blank')">Script 2</button>
+        </div>
+      </div>
+      <div class="fScripts-section">
+        <h2>Projects</h2>
+        <div class="fScripts-buttons">
+          <button class="fs-button" disabled>Coming soon...</button>
+        </div>
+      </div>
+    </div>
   </div>
   
   <script>
-    // Remove the intro overlay once its animation ends
+    // Remove intro overlay after animation ends
     window.addEventListener('load', () => {
       const introOverlay = document.getElementById('introOverlay');
       introOverlay.addEventListener('animationend', () => {
@@ -247,7 +320,22 @@
       glow.style.top = y + 'px';
     });
     
-    // Reopen intro modal if Help is clicked (for demo purposes, you could replace with a separate help overlay)
+    // Navigation between pages
+    const navMain = document.getElementById('navMain');
+    const navFScripts = document.getElementById('navFScripts');
+    const mainPage = document.getElementById('mainPage');
+    const fScriptsPage = document.getElementById('fScriptsPage');
+    
+    navMain.addEventListener('click', () => {
+      mainPage.style.display = 'block';
+      fScriptsPage.style.display = 'none';
+    });
+    navFScripts.addEventListener('click', () => {
+      mainPage.style.display = 'none';
+      fScriptsPage.style.display = 'block';
+    });
+    
+    // (Optional) Reopen intro overlay if Help is clicked on Main Page
     const helpLink = document.getElementById('helpLink');
     helpLink.addEventListener('click', () => {
       const introOverlay = document.getElementById('introOverlay');
