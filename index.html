@@ -1,47 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kurrent-Site</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Importing a modern font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Cursor Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            background: url('https://images.pexels.com/photos/8991520/pexels-photo-8991520.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            cursor: none; /* Hide the default cursor */
+        }
+        .custom-cursor {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none; /* Make sure the cursor dot doesn't block clicks */
+            z-index: 1000; /* Ensure the custom cursor is on top */
+        }
+        .click-effect {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: grow 0.5s forwards;
+            z-index: 999; /* Ensure the click effect is below the custom cursor */
+        }
+        @keyframes grow {
+            to {
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+                margin-left: -45px;
+                margin-top: -45px;
+            }
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+        .logo img {
+            height: 50px; /* Adjust size as needed */
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 100px);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .main-text {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .primary-btn, .secondary-btn, .tertiary-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 10px;
+            text-decoration: none; /* Ensure the link looks like a button */
+        }
+        .primary-btn:hover, .secondary-btn:hover, .tertiary-btn:hover {
+            background-color: white;
+            color: black;
+        }
+        .scripts-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        .scripts-container.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .copied-message {
+            color: #4CAF50;
+            font-weight: bold;
+            display: none;
+        }
+        .bubble {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.2), rgba(128, 128, 128, 0.2));
+            border-radius: 50%;
+            animation: bubble 3s ease-in-out infinite;
+            opacity: 0;
+            z-index: 0;
+        }
+        @keyframes bubble {
+            0% {
+                transform: scale(0);
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        .hover-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease, margin-top 0.3s ease;
+        }
+        .secondary-btn:first-of-type:hover + .hover-text,
+        .secondary-btn:last-of-type:hover + .hover-text,
+        .tertiary-btn:hover + .hover-text {
+            margin-top: 10px;
+            opacity: 1;
+        }
+        .secondary-btn:first-of-type:hover ~ .secondary-btn,
+        .secondary-btn:first-of-type:hover ~ .secondary-btn + .hover-text,
+        .secondary-btn:first-of-type:hover ~ .tertiary-btn,
+        .secondary-btn:first-of-type:hover ~ .tertiary-btn + .hover-text {
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <h1>Kurrent OFFICAL</h1>
-  </header>
-
-  <main>
-  <!-- Hero Section without buttons -->
-  <section class="hero">
-    <div class="image-container">
-      <img src="https://steamuserimages-a.akamaihd.net/ugc/269467742830476965/6B6B44F3A39C1F4C75910E90EB39BDF069474D98/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Hero Image" class="background-image">
+    <div class="nav">
+        <div class="logo">
+            <img src="https://i.pinimg.com/1200x/d7/b0/37/d7b037bc86c2a08528c525fb1ca6bae3.jpg" alt="Logo" onclick="showMainPage()">
+        </div>
     </div>
-  </section>
+    <div class="container" id="main-page">
+        <div class="main-text">Selling scripts for our customers is our mission.</div>
+        <button class="primary-btn" onclick="showScriptsPage()">Scripts</button>
+    </div>
+    <div class="container scripts-container" id="scripts-page">
+        <div class="main-text">To be continued</div>
+        <button class="secondary-btn" onclick="openLink('https://pastebin.com/fBYCkWVz')">Auto Broly</button>
+        <div class="hover-text">This script was verified by communities, like BLK</div>
+        <button class="secondary-btn" onclick="openLink('https://pastebin.com/4UBpasE1')">Auto TOP</button>
+        <div class="hover-text">This script was verified by communities, like BLK</div>
+        <a href="files/All_Scripts.zip" class="tertiary-btn" download>Download ZIP</a>
+        <div class="hover-text">This ZIP file contains useful scripts</div>
+        <p id="copied-message" class="copied-message">Copied!</p>
+    </div>
 
+    <div class="custom-cursor" id="custom-cursor"></div>
 
-    <!-- Active Scripts Section -->
-    <section class="active-scripts">
-      <h2>Active Scripts</h2>
-      <div class="section-buttons">
-        <button class="fade-in" onclick="window.location.href='https://raw.githubusercontent.com/ProphecySkondo/Stat-Setter/refs/heads/main/Full'">Stat Setter</button>
-        <button class="fade-in" onclick="window.location.href='https://discord.gg/tuc4hUd7qx'">Infinite Stats</button>
-      </div>
-    </section>
+    <script>
+        // Function to show the main page
+        function showMainPage() {
+            document.getElementById('scripts-page').classList.remove('active');
+            document.getElementById('main-page').style.display = 'flex';
+        }
 
-    <!-- Projects Section -->
-    <section class="projects">
-      <h2>Projects</h2>
-      <div class="section-buttons">
-        <button class="fade-in" disabled>comming soon...</button>
-      </div>
-    </section>
-  </main>
+        // Function to show the scripts page
+        function showScriptsPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('scripts-page').classList.add('active');
+        }
 
-  <footer class="site-footer">
-    <p>&copy; 2025 Script Site. All rights reserved.</p>
-  </footer>
+        // Function to open a specific URL in a new tab
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+        // Function to create bubble effects
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            document.body.appendChild(bubble);
+
+            bubble.style.left = Math.random() * 100 + 'vw';
+            bubble.style.top = Math.random() * 100 + 'vh';
+            bubble.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 5000);
+        }
+
+        setInterval(createBubble, 1000);
+
+        // Custom cursor functionality
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Click effect functionality
+        document.addEventListener('click', (e) => {
+            const clickEffect = document.createElement('div');
+            clickEffect.className = 'click-effect';
+            clickEffect.style.left = `${e.clientX}px`;
+            clickEffect.style.top = `${e.clientY}px`;
+            document.body.appendChild(clickEffect);
+
+            setTimeout(() => {
+                clickEffect.remove();
+            }, 500);
+        });
+    </script>
 </body>
 </html>
