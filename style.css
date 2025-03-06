@@ -8,20 +8,24 @@ body {
     margin: 0;
 }
 
-/* Centered container */
+/* Centered container with border */
 .container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
+    padding: 30px;
+    border: 3px solid white;  /* Outline around the container */
+    border-radius: 15px;      /* Rounded corners for the container */
+    background-color: rgba(255, 255, 255, 0.2); /* Slight background to make the outline pop */
 }
 
 /* Stylish buttons */
 button {
     background: white;
     border: none;
-    padding: 15px 30px;
-    border-radius: 30px; /* Rounded corners */
-    font-size: 18px;
+    padding: 20px 40px;  /* Bigger buttons */
+    border-radius: 30px; /* Rounded corners for the buttons */
+    font-size: 20px;     /* Larger font */
     font-weight: bold;
     color: black;
     cursor: pointer;
