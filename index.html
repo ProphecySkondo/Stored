@@ -8,7 +8,7 @@
     /* Base Styles */
     body {
       margin: 0;
-      background-color: #000000; /* Fixed: Set background to black */
+      background-color: #000; /* Black background */
       overflow: hidden;
       cursor: none; /* Hide default cursor */
       font-family: Arial, sans-serif;
@@ -23,35 +23,36 @@
       text-shadow: 
         0 0 10px #fff,
         0 0 20px #fff,
-        0 0 30px #ffffff,
-        0 0 40px #ffffff,
-        0 0 50px #ffffff;
+        0 0 30px #fff,
+        0 0 40px #fff,
+        0 0 50px #fff;
     }
     
     /* Custom Cursor (Small Circle) */
     .custom-cursor {
-      position: fixed; /* Fixed instead of absolute */
+      position: fixed;
       width: 8px;
       height: 8px;
       background-color: #fff;
       border-radius: 50%;
       pointer-events: none;
+      /* Center the element relative to its left/top */
       transform: translate(-50%, -50%);
-      transition: transform 0.05s linear; /* Smooth movement */
+      transition: left 0.05s linear, top 0.05s linear;
       z-index: 10000;
     }
     
     /* Glowing Aura */
     .cursor-glow {
-      position: fixed; /* Fixed instead of absolute */
-      width: 50px; /* Slightly larger */
+      position: fixed;
+      width: 50px;
       height: 50px;
-      background-color: rgba(255, 255, 255, 0.2); /* More visible glow */
+      background-color: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      filter: blur(15px); /* Increased blur for stronger glow */
-      transition: transform 0.05s linear;
+      filter: blur(15px);
+      transition: left 0.05s linear, top 0.05s linear;
       z-index: 9999;
     }
   </style>
@@ -74,8 +75,11 @@
       const x = e.clientX;
       const y = e.clientY;
       
-      cursor.style.transform = `translate(${x}px, ${y}px)`;
-      glow.style.transform = `translate(${x}px, ${y}px)`;
+      // Set left and top to position the elements with center alignment
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+      glow.style.left = x + 'px';
+      glow.style.top = y + 'px';
     });
   </script>
 </body>
