@@ -174,6 +174,7 @@
       height: 20vh;
     }
     .box {
+      position: relative; /* Required for the white ray positioning */
       flex: 1;
       min-width: 250px;
       min-height: 150px;
@@ -187,6 +188,7 @@
       justify-content: center;
       align-items: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
     }
     .box:hover {
       transform: translateY(-5px);
@@ -200,6 +202,32 @@
       margin: 10px 0 0 0;
       font-size: 1rem;
       text-align: center;
+    }
+    
+    /* White Ray Effect */
+    .white-ray {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;  /* Thin ray */
+      background: rgba(255, 255, 255, 0.4); /* Not too intense */
+      animation: rayEffect 1s forwards;
+      pointer-events: none;
+    }
+    @keyframes rayEffect {
+      0% {
+        left: -100%;
+        opacity: 0;
+      }
+      50% {
+        left: 0;
+        opacity: 1;
+      }
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
     }
     
     /* Video Embed (Main Page) */
@@ -283,14 +311,14 @@
   </style>
 </head>
 <body>
-  <!-- Animated Bubble Background (Bubbles are generated via JS) -->
+  <!-- Animated Bubble Background -->
   
   <!-- Brand Logo (Top Left) -->
   <div class="brand-logo" id="brandLogo">
     <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo">
   </div>
   
-  <!-- Top Right Navigation (Main, FScripts, Help + Social Icons) -->
+  <!-- Top Right Navigation -->
   <div class="nav-top">
     <a id="navMain">Main</a>
     <a id="navFScripts">FScripts</a>
@@ -367,16 +395,44 @@
   </footer>
   
   <script>
-    // Hover Effect: Tilt box based on mouse position
+    // Function to schedule the white ray effect repeatedly while hovering
+    function scheduleRay(box) {
+      if (!box.isHovered) return;
+      let delay = Math.random() * 5000 + 5000; // Random delay between 5-10 seconds
+      box.rayTimeout = setTimeout(() => {
+        if (!box.isHovered) return;
+        let ray = document.createElement("div");
+        ray.classList.add("white-ray");
+        box.appendChild(ray);
+        ray.addEventListener("animationend", () => {
+          ray.remove();
+          // Schedule the next ray effect if still hovered
+          if (box.isHovered) scheduleRay(box);
+        });
+      }, delay);
+    }
+    
+    // Enhance the tilt effect and add white ray functionality to each box
     document.querySelectorAll(".box").forEach((box) => {
+      // Start scheduling the white ray effect when mouse enters the box
+      box.addEventListener("mouseenter", () => {
+        box.isHovered = true;
+        scheduleRay(box);
+      });
+      
+      // More prominent tilt effect on mouse move
       box.addEventListener("mousemove", (e) => {
         const rect = box.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        box.style.transform = `rotateX(${y * 10}deg) rotateY(${x * 10}deg) translateY(-5px)`;
+        box.style.transform = `rotateX(${y * 15}deg) rotateY(${x * 15}deg) translateY(-5px)`;
         box.style.boxShadow = "0 10px 20px rgba(255, 255, 255, 0.3)";
       });
+      
+      // Reset tilt and clear scheduled effects on mouse leave
       box.addEventListener("mouseleave", () => {
+        box.isHovered = false;
+        clearTimeout(box.rayTimeout);
         box.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0px)";
         box.style.boxShadow = "0 5px 15px rgba(255, 255, 255, 0.2)";
       });
@@ -386,7 +442,7 @@
     function createBubble() {
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      const size = Math.random() * 40 + 10; // Random size between 10 and 50px
+      const size = Math.random() * 40 + 10;
       bubble.style.width = size + 'px';
       bubble.style.height = size + 'px';
       bubble.style.left = Math.random() * window.innerWidth + 'px';
