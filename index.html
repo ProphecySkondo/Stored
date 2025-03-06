@@ -1,631 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Six's Community | Final Stand Scripts</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .nav {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px 40px;
-            background-color: rgba(0, 0, 0, 0.8);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
-        
-        .nav-link {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                         0 0 20px rgba(255, 255, 255, 0.3),
-                         0 0 30px rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        
-        .nav-link:hover {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                         0 0 20px rgba(255, 255, 255, 0.5),
-                         0 0 30px rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 120px 20px 20px;
-            position: relative;
-        }
-        
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 980px;
-            position: relative;
-        }
-        
-        .hero-title {
-            font-size: 80px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
-                         0 0 20px rgba(255, 255, 255, 0.2),
-                         0 0 30px rgba(255, 255, 255, 0.1);
-        }
-        
-        .info-boxes {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto;
-        }
-        
-        .info-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .info-box::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 15px;
-            padding: 1px;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                transparent,
-                transparent,
-                transparent
-            );
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-        
-        .info-box:hover::before {
-            background: linear-gradient(
-                45deg,
-                rgba(255,255,255,0.1),
-                rgba(255,255,255,0.2),
-                rgba(255,255,255,0.3),
-                rgba(255,255,255,0.2)
-            );
-            opacity: 1;
-        }
-        
-        .info-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-        
-        .info-box-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        .info-box-description {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #a1a1a6;
-        }
-        
-        .discord-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin: 60px auto;
-            max-width: 800px;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .discord-logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .discord-logo-svg {
-            fill: #5865F2;
-            transition: transform 0.3s ease;
-        }
-
-        .discord-logo-svg:hover {
-            transform: scale(1.1);
-        }
-
-        .discord-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 2px;
-        }
-        
-        .discord-description {
-            font-size: 18px;
-            color: #a1a1a6;
-            line-height: 1.6;
-            margin: 20px 0;
-        }
-        
-        .discord-button {
-            background: #5865F2;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .discord-button:hover {
-            background: #4752c4;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
-        }
-        
-        .description-section {
-            background-color: #111;
-            padding: 60px 20px;
-            margin-top: 40px;
-            width: 100%;
-        }
-        
-        .description-container {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-        
-        .description-title {
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
-                         0 0 20px rgba(255, 255, 255, 0.2);
-        }
-        
-        .description-text {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #a1a1a6;
-            margin-bottom: 20px;
-        }
-        
-        /* Scripts page styles */
-        .scripts-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 100px 20px 50px;
-            background-color: #000;
-            min-height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            overflow-y: auto;
-        }
-        
-        .scripts-header {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        
-        .scripts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        .script-card {
-            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
-            border-radius: 15px;
-            padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .script-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .script-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #0071e3, #00c6ff);
-        }
-        
-        .script-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .script-description {
-            color: #a1a1a6;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .copy-btn {
-            background: linear-gradient(90deg, #0071e3, #00c6ff);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.2s, opacity 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .copy-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        .copy-btn:active {
-            transform: scale(0.95);
-            opacity: 0.8;
-        }
-        
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.3s;
-        }
-        
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background-color: #333;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
-            z-index: 1000;
-        }
-        
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        /* Ripple effect styles */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(0);
-            animation: ripple-animation 0.8s ease-out;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        @keyframes ripple-animation {
-            0% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(100);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Main Page -->
-    <div id="main-page">
-        <nav class="nav">
-            <div class="nav-links">
-                <a href="#top" class="nav-link">Main</a>
-                <a href="#about" class="nav-link">About us</a>
-                <a href="#" class="nav-link" id="scripts-link">Scripts</a>
-            </div>
-        </nav>
-        
-        <section class="hero" id="top">
-            <div class="hero-content">
-                <h1 class="hero-title">Six's Community got every script in Final Stand</h1>
-                <div class="info-boxes">
-                    <div class="info-box">
-                        <h2 class="info-box-title">What do we offer</h2>
-                        <p class="info-box-description">
-                            We offer real-time scripts, trusted and well-made, for our community. We either sell paid scripts or just give free ones. Check the ones we have in our scripts page!
-                        </p>
-                    </div>
-                    <div class="info-box">
-                        <h2 class="info-box-title">What executor do we recomend?</h2>
-                        <p class="info-box-description">
-                            Any executor totally works for our scripts, but we definetely recomend Solara or Wave.
-                        </p>
-                    </div>
-                </div>
-                <div class="discord-section">
-                    <div class="discord-logo-container">
-                        <svg class="discord-logo-svg" width="80" height="80" viewBox="0 0 71 55" fill="currentColor">
-                            <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
-                        </svg>
-                        <span class="discord-text">DISCORD</span>
-                    </div>
-                    <p class="discord-description">
-                        For more information, join our discord, we are active incase you have a suggestion or anything like that!
-                    </p>
-                    <a href="https://discord.com/invite/9zPx6fMc" target="_blank" class="discord-button">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                        </svg>
-                        Join our Discord
-                    </a>
-                </div>
-            </div>
-        </section>
-        
-        <section class="description-section" id="about">
-            <div class="description-container">
-                <h2 class="description-title">About Our Community</h2>
-                <p class="description-text">
-                    We are a passionate and dedicated community built around Final Stand, providing high-quality scripts, tools, and resources to enhance the experience for players. Whether you're looking for powerful scripts to gain an edge or simply seeking a place to connect with like-minded players, our community has something for you.
-                </p>
-                <p class="description-text">
-                    At our core, we believe in sharing knowledge and making sure everyone has access to the best resources available. We offer both free and premium scripts, ensuring that everyone, regardless of experience level, can find something valuable here. Our team constantly works to improve, update, and deliver safe and effective scripts that help you get the most out of the game.
-                </p>
-                <p class="description-text">
-                    But we are more than just a marketplace – we are a community. Our members share strategies, provide support, and discuss all things related to Final Stand. Whether you need help setting up a script, troubleshooting issues, or just want to chat about the game, you'll find a welcoming environment here.
-                </p>
-                <p class="description-text">
-                    Join us today and take your Final Stand experience to the next level!
-                </p>
-            </div>
-        </section>
-    </div>
-    
-    <!-- Scripts Page -->
-    <div id="scripts-page" class="scripts-container">
-        <button id="back-button" class="back-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-            Back
-        </button>
-        
-        <h2 class="scripts-header">Final Stand Scripts</h2>
-        
-        <div class="scripts-grid">
-            <!-- Script Cards -->
-            <div class="script-card">
-                <h3 class="script-title">Auto Farm Script</h3>
-                <p class="script-description">Automatically farms resources and experience in Final Stand.</p>
-                <button class="copy-btn" data-script="-- [[ BOOGA HUB V5 ]]
-
-if not game:IsLoaded() then
-    game.Loaded:Wait()
-end
-
-loadstring(game:HttpGet('https://raw.githubusercontent.com/FortniBloxYT1/BOOGA-HUB-V4/main/BOOGA-HUB%20V5.lua'))()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                    </svg>
-                    Copy Script
-                </button>
-            </div>
-            
-            <div class="script-card">
-                <h3 class="script-title">Auto Broly</h3>
-                <p class="script-description">Automatically beat Broly to gain lots of XP</p>
-                <button class="copy-btn" data-script="AppleSettings = {
-    LevelMax = 800, -- Max Lvl U Want Reach
-    TimerRjQueue = 35, -- Seconds For Queue Else Rejoin
-    TimerForBroly = 180, -- Seconds For Broly Else Rejoin
-    ExtraTimeToLoad = 0, 
-    Senzu = false, -- Spam The Senzu
-    PadQueue = 6, -- From 1 to 7
-    Form = {false,'h',3},-- Enable = true/ false - Button Form - Seconds Charge
-    Moves = { -- Put What You Think Are The Best Moves
-        'Big Bang Kamehameha',
-    },
-}
-loadstring(game:HttpGet('https://raw.githubusercontent.com/malumsw/FS/refs/heads/main/ab', true))()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                    </svg>
-                    Copy Script
-                </button>
-            </div>
-            
-            <div class="script-card">
-                <h3 class="script-title">Spam Reds</h3>
-                <p class="script-description">Spam Red Jars/Beans</p>
-                <button class="copy-btn" data-script="TimesRed = 3
-TimexD = 0.000001
-loadstring(game:HttpGet('https://raw.githubusercontent.com/malumsw/FS/main/rs', true))()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                    </svg>
-                    Copy Script
-                </button>
-            </div>
-        </div>
-        
-        <div class="discord-section" style="margin-top: 60px;">
-            <p class="discord-description">
-                For more information and additional scripts, join our Discord community!
-            </p>
-            <a href="https://discord.com/invite/9zPx6fMc" target="_blank" class="discord-button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-                Join Discord for More Scripts
-            </a>
-        </div>
-    </div>
-    
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">Script copied to clipboard!</div>
-    
+<html>
+  <head>
+    <meta name="darkreader-lock">
     <script>
-        // Navigation
-        const mainPage = document.getElementById('main-page');
-        const scriptsPage = document.getElementById('scripts-page');
-        const scriptsLink = document.getElementById('scripts-link');
-        const backButton = document.getElementById('back-button');
-        const toast = document.getElementById('toast');
-        
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') === '#' || this.id === 'scripts-link') return;
-                
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Scripts page toggle
-        scriptsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            mainPage.style.display = 'none';
-            scriptsPage.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        backButton.addEventListener('click', function() {
-            scriptsPage.style.display = 'none';
-            mainPage.style.display = 'block';
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Copy script functionality
-        const copyButtons = document.querySelectorAll('.copy-btn');
-        
-        copyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const scriptText = this.getAttribute('data-script');
-                navigator.clipboard.writeText(scriptText).then(() => {
-                    toast.classList.add('show');
-                    setTimeout(() => {
-                        toast.classList.remove('show');
-                    }, 2000);
-                });
-            });
-        });
-        
-        // Ripple effect on click
-        document.addEventListener('click', function(e) {
-            // Create ripple element
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            
-            // Set position
-            ripple.style.left = e.clientX + 'px';
-            ripple.style.top = e.clientY + 'px';
-            
-            // Add to body
-            document.body.appendChild(ripple);
-            
-            // Remove after animation completes
-            setTimeout(() => {
-                ripple.remove();
-            }, 800);
-        });
+      window.startLoad = Date.now()
+      // g663 fix: forbid change of string prototype
+      Object.defineProperty(String.prototype, 'format', {
+        writable: false,
+        configurable: false
+      });
+      Object.defineProperty(String.prototype, 'replaceAll', {
+        writable: false,
+        configurable: false
+      });
     </script>
-</body>
+    <!-- // #region initial loader -->
+    <script async>
+      const loadingDiv = /* html */ `
+      <div class="initial-loader" style="position: fixed;transition:opacity 0.2s;inset: 0;background:black;display: flex;justify-content: center;align-items: center;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;gap: 15px;" ontransitionend="this.remove()">
+    <div>
+        <img src="./loading-bg.jpg" alt="Prismarine Web Client" style="position:fixed;inset:0;width:100%;height:100%;z-index: -2;object-fit: cover;filter: blur(3px);">
+        <div style="position: fixed;inset: 0;z-index: -1;background-color: rgba(0, 0, 0, 0.8);"></div>
+    </div>
+    <div>
+        <div style="font-size: calc(var(--font-size) * 1.8);color: lightgray;" class="title">Loading...</div>
+        <div style="font-size: var(--font-size);color: rgb(176, 176, 176);margin-top: 3px;text-align: center" class="subtitle">A true Minecraft client in your browser!</div>
+        <!-- small text pre -->
+        <div style="font-size: calc(var(--font-size) * 0.6);color: rgb(150, 150, 150);margin-top: 3px;text-align: center;white-space: pre-line;" class="advanced-info"></div>
+    </div>
+</div>
+`
+      const insertLoadingDiv = () => {
+          const loadingDivElem = document.createElement('div')
+          loadingDivElem.innerHTML = loadingDiv
+          if (!window.pageLoaded) {
+            document.documentElement.appendChild(loadingDivElem)
+          }
+          // load error handling
+          const onError = (errorOrMessage, log = false) => {
+            let message = errorOrMessage instanceof Error ? (errorOrMessage.stack ?? errorOrMessage.message) : errorOrMessage
+            if (log) console.log(message)
+            if (typeof message !== 'string') message = String(message)
+            if (document.querySelector('.initial-loader') && document.querySelector('.initial-loader').querySelector('.title').textContent !== 'Error') {
+              document.querySelector('.initial-loader').querySelector('.title').textContent = 'Error'
+              const [errorMessage, ...errorStack] = message.split('\n')
+              document.querySelector('.initial-loader').querySelector('.subtitle').textContent = errorMessage
+              document.querySelector('.initial-loader').querySelector('.advanced-info').textContent = errorStack.join('\n')
+              if (window.navigator.maxTouchPoints > 1) window.location.hash = '#dev' // show eruda
+              // unregister all sw
+              if (window.navigator.serviceWorker) {
+                window.navigator.serviceWorker.getRegistrations().then(registrations => {
+                  registrations.forEach(registration => {
+                    registration.unregister()
+                  })
+                })
+              }
+              window.lastError = errorOrMessage instanceof Error ? errorOrMessage : new Error(errorOrMessage)
+            }
+          }
+          window.addEventListener('unhandledrejection', (e) => onError(e.reason, true))
+          window.addEventListener('error', (e) => onError(e.error ?? e.message))
+        }
+        insertLoadingDiv()
+        document.addEventListener('DOMContentLoaded', () => {
+          // move loading div to the end of body
+          const loadingDivElem = document.querySelector('.initial-loader');
+          const newContainer = document.body; // replace with your new container
+          if (loadingDivElem) newContainer.appendChild(loadingDivElem);
+        })
+    </script>
+    <script type="module" async>
+      const checkLoadEruda = () => {
+        if (window.location.hash === '#dev') {
+          // todo precache (check offline)?
+          import('https://cdn.skypack.dev/eruda').then(({ default: eruda }) => {
+            eruda.init()
+          })
+          Promise.all([import('https://cdn.skypack.dev/stacktrace-gps'), import('https://cdn.skypack.dev/error-stack-parser')]).then(async ([{ default: StackTraceGPS }, { default: ErrorStackParser }]) => {
+            if (!window.lastError) return
+
+            let stackFrames = [];
+            if (window.lastError instanceof Error) {
+              stackFrames = ErrorStackParser.parse(window.lastError);
+            }
+            console.log('stackFrames', stackFrames)
+            const gps = new StackTraceGPS()
+            const mappedFrames = await Promise.all(
+              stackFrames.map(frame => gps.pinpoint(frame))
+            );
+            console.log('mappedFrames', mappedFrames)
+
+            const stackTrace = mappedFrames
+              .map(frame => `at ${frame.functionName} (${frame.fileName}:${frame.lineNumber}:${frame.columnNumber})`)
+              .join('\n');
+            console.log('stackTrace', stackTrace)
+          })
+        }
+      }
+      checkLoadEruda()
+      window.addEventListener('hashchange', (e) => {
+        setTimeout(() => {
+          checkLoadEruda()
+        })
+      })
+    </script>
+    <style>
+      html {
+        background: black;
+      }
+      .initial-loader {
+          --font-size: 20px;
+      }
+      @media screen and (min-width: 550px) {
+          .initial-loader {
+              --font-size: 30px;
+          }
+      }
+      @media screen and (min-width: 950px) {
+          .initial-loader {
+              --font-size: 50px;
+          }
+      }
+    </style>
+    <!-- // #endregion -->
+    <!-- <script type="module">
+      window.loadPluginScript = async ({ pluginName, script }) => {
+        window.loadedPlugins[pluginName] = await import(script)
+      }
+    </script> -->
+    <title>Prismarine Web Client</title>
+    <link rel="favicon" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="canonical" href="https://mcraft.fun">
+    <meta name="description" content="Minecraft web client running in your browser">
+    <meta name="keywords" content="Play, Minecraft, Online, Web, Java, Server, Single player, Javascript, PrismarineJS, Voxel, WebGL, Three.js">
+    <meta name="date" content="2024-07-11" scheme="YYYY-MM-DD">
+    <meta name="language" content="English">
+    <meta name="theme-color" content="#349474">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'>
+    <meta property="og:title" content="Prismarine Web Client" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="favicon.png" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+  </head>
+  <body>
+    <div id="react-root"></div>
+    <div id="ui-root"></div>
+    <!-- inject script -->
+  </body>
 </html>
