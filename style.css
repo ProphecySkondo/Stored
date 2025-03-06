@@ -6,26 +6,43 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+    flex-direction: column;
 }
 
-/* Centered container with border */
+/* Image container */
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;  /* Space between the image and the container */
+}
+
+.background-image {
+    width: 80%;   /* Adjust the width as needed */
+    max-width: 1000px; /* Optional: limit the maximum width */
+    height: auto;
+    object-fit: cover;  /* Ensures the image covers the space */
+}
+
+/* Centered container with border and background image */
 .container {
     display: flex;
     justify-content: space-between;
-    gap: 30px; /* Increased gap between buttons */
-    padding: 40px;
-    border: 3px solid white;  /* Outline around the container */
+    gap: 40px; /* Increased gap between buttons */
+    padding: 50px;
+    border: 5px solid white;  /* White outline around the container */
     border-radius: 15px;      /* Rounded corners for the container */
-    background-color: rgba(255, 255, 255, 0.2); /* Slight background to make the outline pop */
+    background-color: rgba(255, 255, 255, 0.2); /* Slight background */
+    position: relative;
 }
 
 /* Stylish buttons */
 button {
     background: white;
-    border: none;
-    padding: 30px 60px;  /* Much bigger buttons */
+    border: 3px solid black;  /* Outline around the button */
+    padding: 40px 80px;  /* Even bigger buttons */
     border-radius: 40px; /* Larger rounded corners */
-    font-size: 26px;     /* Bigger font size */
+    font-size: 30px;     /* Larger font size */
     font-weight: bold;
     color: black;
     cursor: pointer;
