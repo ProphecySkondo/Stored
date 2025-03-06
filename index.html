@@ -28,7 +28,7 @@
         0 0 60px #ff8a00,
         0 0 70px #ff8a00;
     }
-    /* Custom Cursor */
+    /* Custom Cursor (Small Circle) */
     .custom-cursor {
       position: absolute;
       width: 8px;
@@ -37,23 +37,44 @@
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 10px #fff, 0 0 20px #ff8a00;
       z-index: 10000;
+    }
+    /* Glowing Aura */
+    .cursor-glow {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      filter: blur(10px);
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
+  <!-- Glowing Title -->
   <div class="welcome-text">Welcome to Kurrent</div>
   
-  <!-- Custom Cursor Element -->
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-glow" id="cursorGlow"></div>
   <div class="custom-cursor" id="customCursor"></div>
   
   <script>
-    // Update custom cursor position on mousemove
+    // Grab both elements
     const cursor = document.getElementById('customCursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+    const glow = document.getElementById('cursorGlow');
+    
+    // Update the positions of both elements on mousemove
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+      glow.style.left = x + 'px';
+      glow.style.top = y + 'px';
     });
   </script>
 </body>
