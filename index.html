@@ -1,4 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Simple Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Kurrent</title>
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      background-color: #000;
+      overflow: hidden;
+      cursor: none; /* Hide default cursor */
+      font-family: Arial, sans-serif;
+    }
+    /* Glowing Title */
+    .welcome-text {
+      color: #fff;
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 20px;
+      text-shadow: 
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #ff8a00,
+        0 0 40px #ff8a00,
+        0 0 50px #ff8a00,
+        0 0 60px #ff8a00,
+        0 0 70px #ff8a00;
+    }
+    /* Custom Cursor */
+    .custom-cursor {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px #fff, 0 0 20px #ff8a00;
+      z-index: 10000;
+    }
+  </style>
 </head>
+<body>
+  <div class="welcome-text">Welcome to Kurrent</div>
+  
+  <!-- Custom Cursor Element -->
+  <div class="custom-cursor" id="customCursor"></div>
+  
+  <script>
+    // Update custom cursor position on mousemove
+    const cursor = document.getElementById('customCursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+  </script>
+</body>
+</html>
