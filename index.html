@@ -14,12 +14,59 @@
       font-family: Arial, sans-serif;
     }
     
-    /* Glowing Title */
+    /* Intro Overlay */
+    #introOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 30000;
+      animation: introAnim 3s ease forwards;
+    }
+    /* Keyframes for Intro Animation */
+    @keyframes introAnim {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+    }
+    /* Logo within Intro */
+    .intro-logo {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    /* Bold Title in Intro */
+    .intro-title {
+      color: #fff;
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff;
+    }
+    
+    /* Glowing Title for Main Site */
     .welcome-text {
       color: #fff;
       font-size: 4rem;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 10px;
       text-shadow: 
         0 0 10px #fff,
         0 0 20px #fff,
@@ -40,7 +87,6 @@
       transition: left 0.05s linear, top 0.05s linear;
       z-index: 10000;
     }
-    
     .cursor-glow {
       position: fixed;
       width: 50px;
@@ -54,67 +100,16 @@
       z-index: 9999;
     }
     
-    /* Modal (Intro/Help Tab) */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 20000;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-    .modal.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .modal-content {
-      background-color: #222;
-      padding: 20px 30px;
-      border-radius: 10px;
-      text-align: center;
-      color: #fff;
-      max-width: 600px;
-      width: 80%;
-    }
-    .modal-content h2 {
-      margin-top: 0;
-      font-size: 2.5rem;
-    }
-    .modal-content p {
-      font-size: 1.2rem;
-      margin: 10px 0 20px;
-    }
-    .modal-content button {
-      background-color: #444;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-    .modal-content button:hover {
-      background-color: #666;
-    }
-    
     /* Box Container */
     .box-container {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 20px;
-      margin: 20px auto;
+      gap: 10px;
+      margin: 10px auto;
       width: 90%;
-      height: 35vh; /* Adjusted height */
+      height: 35vh;
     }
-    
     /* Individual Box */
     .box {
       flex: 1;
@@ -122,29 +117,26 @@
       border-radius: 15px;
       background-color: #111;
       color: #fff;
-      padding: 20px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    
     .box:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
-    
     /* Box Content */
     .box h3 {
       margin: 0;
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
     }
-    
     .box p {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-align: center;
     }
     
@@ -152,9 +144,8 @@
     .video-container {
       width: 90%;
       max-width: 800px;
-      margin: 10px auto; /* Reduced gap */
+      margin: 10px auto;
     }
-    
     .video-container iframe {
       width: 100%;
       height: 450px;
@@ -166,10 +157,9 @@
     .text-links {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin: 10px auto; /* Reduced gap */
+      gap: 20px;
+      margin: 10px auto;
     }
-    
     /* Text Links with Glow */
     .text-link {
       font-size: 2rem;
@@ -181,35 +171,29 @@
         0 0 20px currentColor,
         0 0 30px currentColor;
     }
-    
     .text-link:hover {
       transform: translateY(-3px);
     }
-    
     /* Specific Colors for Each Link */
     .discord {
       color: #7289da;
     }
-    
     .youtube {
       color: #ff0000;
     }
-    
     .help {
       color: #ff8c00;
     }
   </style>
 </head>
 <body>
-  <!-- Intro/Help Modal -->
-  <div class="modal" id="helpModal">
-    <div class="modal-content">
-      <h2>Welcome to Kurrent</h2>
-      <p>This is your introduction. Here you can find high-quality products, inf stats, cmds, and services at unbeatable prices. Use the navigation below to join our Discord, visit our Youtube channel, or get more help.</p>
-      <button id="closeModal">Got it</button>
-    </div>
+  <!-- Intro Overlay -->
+  <div id="introOverlay">
+    <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo" class="intro-logo" />
+    <div class="intro-title">Welcome to Kurrent</div>
   </div>
   
+  <!-- Main Content -->
   <!-- Glowing Title -->
   <div class="welcome-text">Welcome to Kurrent</div>
   
@@ -221,33 +205,39 @@
   <div class="box-container">
     <div class="box">
       <h3>What Do We Do?</h3>
-      <p>We sell the best, high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
+      <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
     </div>
     <div class="box">
       <h3>How Do We Do This?</h3>
-      <p>Our top-tier devs and service managers work together in our server to get your order done in no time.</p>
+      <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
     </div>
   </div>
   
   <!-- Video Embed -->
   <div class="video-container">
-    <!-- Replace YOUR_VIDEO_LINK_HERE with your actual video link -->
-    <iframe src="YOUR_VIDEO_LINK_HERE" allowfullscreen></iframe>
+    <!-- Replace YOUR_VIDEO_LINK_HERE with your actual video embed link -->
+    <iframe src="https://www.youtube.com/watch?v=dITg5h_pM0w" allowfullscreen></iframe>
   </div>
   
   <!-- Text Links -->
   <div class="text-links">
     <a href="https://discord.gg/tuc4hUd7qx" class="text-link discord">Discord</a>
     <a href="https://www.youtube.com/@BandzONTOP" class="text-link youtube">Youtube</a>
-    <!-- The Help link will also reopen the modal -->
-    <a href="javascript:void(0);" class="text-link help" id="helpLink">Help</a>
+    <a href="#" class="text-link help" id="helpLink">Help</a>
   </div>
   
   <script>
+    // Remove the intro overlay once its animation ends
+    window.addEventListener('load', () => {
+      const introOverlay = document.getElementById('introOverlay');
+      introOverlay.addEventListener('animationend', () => {
+        introOverlay.style.display = 'none';
+      });
+    });
+    
     // Custom Cursor Functionality
     const cursor = document.getElementById('customCursor');
     const glow = document.getElementById('cursorGlow');
-    
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX;
       const y = e.clientY;
@@ -257,24 +247,12 @@
       glow.style.top = y + 'px';
     });
     
-    // Modal functionality
-    const helpModal = document.getElementById('helpModal');
-    const closeModalBtn = document.getElementById('closeModal');
+    // Reopen intro modal if Help is clicked (for demo purposes, you could replace with a separate help overlay)
     const helpLink = document.getElementById('helpLink');
-    
-    // Show modal on page load
-    window.addEventListener('load', () => {
-      helpModal.classList.remove('hidden');
-    });
-    
-    // Close modal when button is clicked
-    closeModalBtn.addEventListener('click', () => {
-      helpModal.classList.add('hidden');
-    });
-    
-    // Reopen modal when Help link is clicked
     helpLink.addEventListener('click', () => {
-      helpModal.classList.remove('hidden');
+      const introOverlay = document.getElementById('introOverlay');
+      introOverlay.style.display = 'flex';
+      introOverlay.style.animation = 'introAnim 3s ease forwards';
     });
   </script>
 </body>
