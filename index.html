@@ -10,7 +10,6 @@
       margin: 0;
       background-color: #000;
       overflow-x: hidden;
-      cursor: none;
       font-family: Arial, sans-serif;
       position: relative;
     }
@@ -19,7 +18,7 @@
     .bubble {
       position: fixed;
       bottom: -50px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       z-index: 0;
       pointer-events: none;
@@ -135,7 +134,7 @@
       color: #fff;
       font-size: 4rem;
       text-align: center;
-      margin-top: 10px; /* Pushed down further */
+      margin-top: 10px;
       text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff;
     }
     
@@ -164,33 +163,31 @@
       z-index: 9999;
     }
     
-.box-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 5px; /* Reduce gap for closer boxes */
-  margin: 10px auto;
-  width: 90%;
-  height: 20vh; /* Decrease height */
-}
-
-.box {
-  flex: 1;
-  min-width: 250px; /* Smaller width */
-  min-height: 150px; /* Smaller height */
-  border: 2px solid #201d1d;
-  border-radius: 15px;
-  background-color: #111;
-  color: #fff;
-  padding: 10px; /* Reduce padding */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-
+    /* Box Container & Boxes */
+    .box-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 5px;
+      margin: 10px auto;
+      width: 90%;
+      height: 20vh;
+    }
+    .box {
+      flex: 1;
+      min-width: 250px;
+      min-height: 150px;
+      border: 2px solid #201d1d;
+      border-radius: 15px;
+      background-color: #111;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
     .box:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
@@ -370,6 +367,21 @@
   </footer>
   
   <script>
+    // Hover Effect: Tilt box based on mouse position
+    document.querySelectorAll(".box").forEach((box) => {
+      box.addEventListener("mousemove", (e) => {
+        const rect = box.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        box.style.transform = `rotateX(${y * 10}deg) rotateY(${x * 10}deg) translateY(-5px)`;
+        box.style.boxShadow = "0 10px 20px rgba(255, 255, 255, 0.3)";
+      });
+      box.addEventListener("mouseleave", () => {
+        box.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0px)";
+        box.style.boxShadow = "0 5px 15px rgba(255, 255, 255, 0.2)";
+      });
+    });
+  
     // Create floating bubbles
     function createBubble() {
       const bubble = document.createElement('div');
@@ -385,7 +397,7 @@
       }, parseFloat(bubble.style.animationDuration) * 1000);
     }
     setInterval(createBubble, 800);
-    
+  
     // Remove intro overlay after animation ends
     window.addEventListener('load', () => {
       const introOverlay = document.getElementById('introOverlay');
@@ -393,7 +405,7 @@
         introOverlay.style.display = 'none';
       });
     });
-    
+  
     // Custom Cursor Functionality
     const cursor = document.getElementById('customCursor');
     const glow = document.getElementById('cursorGlow');
@@ -405,7 +417,7 @@
       glow.style.left = x + 'px';
       glow.style.top = y + 'px';
     });
-    
+  
     // Navigation between pages
     const navMain = document.getElementById('navMain');
     const navFScripts = document.getElementById('navFScripts');
