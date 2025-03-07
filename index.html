@@ -4,524 +4,181 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to Kurrent</title>
+  <!-- Google Font for a modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
-    /* Base Styles */
-    body {
+    /* Reset & Base Styles */
+    * {
       margin: 0;
-      background: #000000; /* or use your gradient if desired */
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-      position: relative;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
-    /* Bubble Background */
-    .bubble {
-      position: fixed;
-      bottom: -50px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      z-index: 0;
-      pointer-events: none;
-      animation: bubbleUp 6s linear forwards;
-    }
-    @keyframes bubbleUp {
-      0% {
-        transform: translateY(0);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
-    
-    /* Brand Logo (Top Left) */
-    .brand-logo {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 40000;
-      cursor: pointer;
-    }
-    .brand-logo img {
-      width: 80px;
-      transition: transform 0.2s ease;
-    }
-    .brand-logo img:hover {
-      transform: scale(1.1);
-    }
-    
-    /* Top Right Navigation */
-    .nav-top {
-      position: fixed;
-      top: 10px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 40000;
-    }
-    .nav-top a {
-      font-size: 1.2rem;
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
-      margin-right: 10px;
-    }
-    .nav-top a:hover {
-      transform: translateY(-2px);
-    }
-    .nav-top .social-link img {
-      width: 40px;
-      transition: transform 0.2s ease;
-      filter: drop-shadow(0 0 5px currentColor);
-    }
-    .nav-top .social-link img:hover {
-      transform: translateY(-2px);
+      overflow-x: hidden;
     }
     
-    /* Intro Overlay */
-    #introOverlay {
+    /* Preloader */
+    #preloader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #2a1a00;
+      background: #000;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      z-index: 30000;
-      animation: introAnim 3s ease forwards;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
     }
-    @keyframes introAnim {
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      80% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(100%);
-      }
+    #preloader h1 {
+      font-size: 3rem;
+      letter-spacing: 5px;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
-    .intro-logo {
-      width: 200px;
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation: contentFadeIn 1s forwards;
+      animation-delay: 1.5s;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #FFA500;
+    }
+    
+    /* Header Section */
+    header {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      opacity: 0;
+      animation: contentFadeIn 1s forwards;
+      animation-delay: 1.2s;
+    }
+    header h1 {
+      font-size: 4rem;
       margin-bottom: 20px;
     }
-    .intro-title {
-      color: #fff;
+    header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+    
+    /* Content Sections */
+    section {
+      padding: 100px 20px;
+      text-align: center;
+      opacity: 0;
+      animation: contentFadeIn 1s forwards;
+    }
+    section:nth-of-type(1) { animation-delay: 1.8s; }
+    section:nth-of-type(2) { animation-delay: 2s; }
+    section:nth-of-type(3) { animation-delay: 2.2s; }
+    
+    section h2 {
       font-size: 3rem;
-      font-weight: bold;
-      text-align: center;
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+      margin-bottom: 20px;
     }
-    
-    /* Main Page Content */
-    #mainPage {
-      display: block;
-      padding-bottom: 20px;
-      position: relative;
-      z-index: 1000;
-    }
-    .welcome-text {
-      color: #fff;
-      font-size: 4rem;
-      text-align: center;
-      margin-top: 10px;
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff;
-    }
-    
-    /* Custom Cursor */
-    .custom-cursor {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background-color: #fff;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: left 0.05s linear, top 0.05s linear;
-      z-index: 10000;
-    }
-    .cursor-glow {
-      position: fixed;
-      width: 50px;
-      height: 50px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      filter: blur(15px);
-      transition: left 0.05s linear, top 0.05s linear;
-      z-index: 9999;
-    }
-    
-    /* Box Container & Boxes */
-    .box-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 5px;
-      margin: 10px auto;
-      width: 90%;
-      height: 20vh;
-    }
-    .box {
-      position: relative;
-      flex: 1;
-      min-width: 250px;
-      min-height: 150px;
-      border: 2px solid #FF8C00;
-      border-radius: 15px;
-      background-color: #1a1a1a;
-      color: #fff;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      overflow: hidden;
-    }
-    .box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-    }
-    .box h3 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-    .box p {
-      margin: 10px 0 0 0;
-      font-size: 1rem;
-      text-align: center;
-    }
-    
-    /* Box Header: places icon beside heading */
-    .box-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .box-icon {
-      width: 40px;
-      height: auto;
-    }
-    
-    /* White Ray Effect */
-    .white-ray {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.4);
-      animation: rayEffect 1s forwards;
-      pointer-events: none;
-    }
-    @keyframes rayEffect {
-      0% {
-        left: -100%;
-        opacity: 0;
-      }
-      50% {
-        left: 0;
-        opacity: 1;
-      }
-      100% {
-        left: 100%;
-        opacity: 0;
-      }
-    }
-    
-    /* Video Embed (Main Page) */
-    .video-container {
-      width: 90%;
+    section p {
+      font-size: 1.1rem;
       max-width: 800px;
-      margin: 5px auto;
-    }
-    .video-container iframe {
-      width: 100%;
-      height: 450px;
-      border: none;
-      border-radius: 10px;
+      margin: 0 auto;
     }
     
-    /* FScripts Page Content */
-    #fScriptsPage {
-      display: none;
-      padding-bottom: 20px;
-      position: relative;
-      z-index: 1000;
-    }
-    .fScripts-container {
-      width: 90%;
-      margin: 5px auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .fScripts-section {
-      background-color: #1a1a1a;
-      padding: 15px;
-      border: 2px solid #FF8C00;
-      border-radius: 15px;
-      color: #fff;
-      text-align: center;
-    }
-    .fScripts-section h2 {
-      margin: 0 0 10px 0;
-      font-size: 2rem;
-    }
-    .fScripts-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .fs-button {
-      background-color: #222;
-      border: 2px solid #FF8C00;
-      color: #fff;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .fs-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
-    }
-    
-    /* Help Page Content */
-    #helpPage {
-      display: none;
-      padding: 20px;
-      position: relative;
-      z-index: 1000;
-      color: #fff;
-      text-align: center;
-      font-size: 1.2rem;
+    /* Fade In Animation */
+    @keyframes contentFadeIn {
+      to { opacity: 1; }
     }
     
     /* Footer */
     footer {
       text-align: center;
-      color: #fff;
-      margin: 10px 0;
-      font-size: 1rem;
+      padding: 40px 0;
+      background: #121212;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <!-- Animated Bubble Background -->
-  
-  <!-- Brand Logo (Top Left) -->
-  <div class="brand-logo" id="brandLogo">
-    <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo">
+  <!-- Preloader -->
+  <div id="preloader">
+    <h1>Loading...</h1>
   </div>
   
-  <!-- Top Right Navigation -->
-  <div class="nav-top">
-    <a id="navMain">Main</a>
-    <a id="navFScripts">FScripts</a>
-    <a id="navHelp">Help</a>
-    <a href="https://discord.gg/tuc4hUd7qx" class="social-link" target="_blank">
-      <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png" alt="Discord">
-    </a>
-    <a href="https://www.youtube.com/@BandzONTOP" class="social-link" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="Youtube">
-    </a>
-  </div>
-  
-  <!-- Intro Overlay -->
-  <div id="introOverlay">
-    <img src="https://media.discordapp.net/attachments/1346919688663466080/1347303424445644883/K_2.png?ex=67cb5598&is=67ca0418&hm=921a37299762cc4003ff4d78bf0fc23dbc8f200192d8fe57ef064c74d1d7e98d&=&format=webp&quality=lossless&width=968&height=968" alt="Kurrent Logo" class="intro-logo">
-    <div class="intro-title">Welcome to Kurrent</div>
-  </div>
-  
-  <!-- Main Page Content -->
-  <div id="mainPage">
-    <div class="welcome-text">Welcome to Kurrent</div>
-    
-    <!-- Custom Cursor Elements -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="custom-cursor" id="customCursor"></div>
-    
-    <!-- Box Container -->
-    <div class="box-container">
-      <div class="box">
-        <div class="box-header">
-          <img src="https://cdn-icons-png.flaticon.com/512/61/61972.png" alt="Services Icon" class="box-icon">
-          <h3>What Do We Do?</h3>
-        </div>
-        <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
-      </div>
-      <div class="box">
-        <div class="box-header">
-          <img src="https://pngimg.com/d/question_mark_PNG91.png" alt="Question Mark Icon" class="box-icon">
-          <h3>How do we accomplish this?</h3>
-        </div>
-        <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
-      </div>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo"><a href="#">Kurrent</a></div>
+    <div class="menu">
+      <a href="#home">Home</a>
+      <a href="#scripts">Scripts</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </div>
-    
-    <!-- Video Embed -->
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/klRN5Bp21AY" allowfullscreen></iframe>
-    </div>
-  </div>
+  </nav>
   
-  <!-- FScripts Page Content -->
-  <div id="fScriptsPage">
-    <div class="welcome-text" style="font-size: 3rem; margin-top: 60px;">FScripts Menu</div>
-    <div class="fScripts-container">
-      <div class="fScripts-section">
-        <h2>Active Scripts</h2>
-        <div class="fScripts-buttons">
-          <button class="fs-button" onclick="window.open('https://github.com/ProphecySkondo/Stat-Setter/blob/main/Full','_blank')">Kurrent Stat-Set</button>
-          <button class="fs-button" disabled>Coming soon...</button>
-        </div>
-      </div>
-      <div class="fScripts-section">
-        <h2>Projects</h2>
-        <div class="fScripts-buttons">
-          <button class="fs-button" disabled>Coming soon...</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Header Section -->
+  <header id="home">
+    <h1>Welcome to Kurrent</h1>
+    <p>Your ultimate hub for quality products, scripts, and more.</p>
+  </header>
   
-  <!-- Help Page Content -->
-  <div id="helpPage">
-    <h2>Help Menu</h2>
-    <p>Here you can find FAQs, contact information, and support resources to help you with our products and services.</p>
-  </div>
+  <!-- Scripts Section -->
+  <section id="scripts">
+    <h2>Scripts</h2>
+    <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
+  </section>
+  
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Reach out to learn more about our products and how we can help you.</p>
+  </section>
   
   <!-- Footer -->
   <footer>
-    "I love these ketamine and glocks" - Drilly
+    &copy; 2025 Kurrent. All rights reserved.
   </footer>
   
   <script>
-    // Function to schedule the white ray effect repeatedly while hovering
-    function scheduleRay(box) {
-      if (!box.isHovered) return;
-      let delay = Math.random() * 5000 + 5000; // Random delay between 5-10 seconds
-      box.rayTimeout = setTimeout(() => {
-        if (!box.isHovered) return;
-        let ray = document.createElement("div");
-        ray.classList.add("white-ray");
-        box.appendChild(ray);
-        ray.addEventListener("animationend", () => {
-          ray.remove();
-          // Schedule the next ray effect if still hovered
-          if (box.isHovered) scheduleRay(box);
-        });
-      }, delay);
-    }
-    
-    // Enhance the tilt effect and add white ray functionality to each box
-    document.querySelectorAll(".box").forEach((box) => {
-      // Start scheduling the white ray effect when mouse enters the box
-      box.addEventListener("mouseenter", () => {
-        box.isHovered = true;
-        scheduleRay(box);
-      });
-      
-      // More prominent tilt effect on mouse move
-      box.addEventListener("mousemove", (e) => {
-        const rect = box.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        box.style.transform = `rotateX(${y * 15}deg) rotateY(${x * 15}deg) translateY(-5px)`;
-        box.style.boxShadow = "0 10px 20px rgba(255, 255, 255, 0.3)";
-      });
-      
-      // Reset tilt and clear scheduled effects on mouse leave
-      box.addEventListener("mouseleave", () => {
-        box.isHovered = false;
-        clearTimeout(box.rayTimeout);
-        box.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0px)";
-        box.style.boxShadow = "0 5px 15px rgba(255, 255, 255, 0.2)";
-      });
-    });
-  
-    // Create floating bubbles
-    function createBubble() {
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      const size = Math.random() * 40 + 10;
-      bubble.style.width = size + 'px';
-      bubble.style.height = size + 'px';
-      bubble.style.left = Math.random() * window.innerWidth + 'px';
-      bubble.style.animationDuration = (Math.random() * 4 + 4) + 's';
-      document.body.appendChild(bubble);
+    // Remove preloader once the window has loaded
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
       setTimeout(() => {
-        bubble.remove();
-      }, parseFloat(bubble.style.animationDuration) * 1000);
-    }
-    setInterval(createBubble, 800);
-  
-    // Remove intro overlay after animation ends
-    window.addEventListener('load', () => {
-      const introOverlay = document.getElementById('introOverlay');
-      introOverlay.addEventListener('animationend', () => {
-        introOverlay.style.display = 'none';
-      });
-    });
-  
-    // Custom Cursor Functionality
-    const cursor = document.getElementById('customCursor');
-    const glow = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      cursor.style.left = x + 'px';
-      cursor.style.top = y + 'px';
-      glow.style.left = x + 'px';
-      glow.style.top = y + 'px';
-    });
-  
-    // Navigation between pages
-    const navMain = document.getElementById('navMain');
-    const navFScripts = document.getElementById('navFScripts');
-    const navHelp = document.getElementById('navHelp');
-    const mainPage = document.getElementById('mainPage');
-    const fScriptsPage = document.getElementById('fScriptsPage');
-    const helpPage = document.getElementById('helpPage');
-    
-    navMain.addEventListener('click', () => {
-      mainPage.style.display = 'block';
-      fScriptsPage.style.display = 'none';
-      helpPage.style.display = 'none';
-    });
-    navFScripts.addEventListener('click', () => {
-      mainPage.style.display = 'none';
-      fScriptsPage.style.display = 'block';
-      helpPage.style.display = 'none';
-    });
-    navHelp.addEventListener('click', () => {
-      mainPage.style.display = 'none';
-      fScriptsPage.style.display = 'none';
-      helpPage.style.display = 'block';
-    });
-    
-    // Brand logo click returns to main page
-    const brandLogo = document.getElementById('brandLogo');
-    brandLogo.addEventListener('click', () => {
-      mainPage.style.display = 'block';
-      fScriptsPage.style.display = 'none';
-      helpPage.style.display = 'none';
+        preloader.style.display = 'none';
+      }, 1000);
     });
   </script>
 </body>
