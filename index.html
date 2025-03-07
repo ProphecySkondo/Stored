@@ -8,7 +8,7 @@
     /* Base Styles */
     body {
       margin: 0;
-      background: #000000; /*linear-gradient(45deg, #FFA500, #FF8C00);*/
+      background: #000000; /* or use your gradient if desired */
       overflow-x: hidden;
       font-family: Arial, sans-serif;
       position: relative;
@@ -195,13 +195,25 @@
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
     .box h3 {
-      margin: 0 0 10px 0;
+      margin: 0;
       font-size: 1.8rem;
     }
     .box p {
       margin: 10px 0 0 0;
       font-size: 1rem;
       text-align: center;
+    }
+    
+    /* Box Header: places icon beside heading */
+    .box-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .box-icon {
+      width: 40px;
+      height: auto;
     }
     
     /* White Ray Effect */
@@ -347,17 +359,21 @@
     
     <!-- Box Container -->
     <div class="box-container">
-  <div class="box">
-    <h3>What Do We Do?</h3>
-    <img src="https://cdn-icons-png.flaticon.com/512/61/61972.png" alt="Services Icon" class="box-icon">
-    <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
-  </div>
-  <div class="box">
-    <h3>How do we accomplish this?</h3>
-    <img src="https://pngimg.com/d/question_mark_PNG91.png" alt="Question Mark Icon" class="box-icon">
-    <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
-  </div>
-</div>
+      <div class="box">
+        <div class="box-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/61/61972.png" alt="Services Icon" class="box-icon">
+          <h3>What Do We Do?</h3>
+        </div>
+        <p>We offer high-quality products—inf stats, cmds, and services—all at unbeatable prices.</p>
+      </div>
+      <div class="box">
+        <div class="box-header">
+          <img src="https://pngimg.com/d/question_mark_PNG91.png" alt="Question Mark Icon" class="box-icon">
+          <h3>How do we accomplish this?</h3>
+        </div>
+        <p>Our top-tier devs and service managers work together in our server to complete your orders quickly.</p>
+      </div>
+    </div>
     
     <!-- Video Embed -->
     <div class="video-container">
