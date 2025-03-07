@@ -200,6 +200,43 @@
       text-align: center;
     }
     
+    /* Spinning Images Section (Marquee) */
+    #spinning-images {
+      padding: 40px 0;
+      background: transparent;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    #spinning-images.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .image-marquee {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .image-track {
+      display: flex;
+      gap: 30px;
+      /* Adjust the duration to change the speed (lower = faster) */
+      animation: marquee 5s linear infinite;
+    }
+    .image-track img {
+      height: 100px; /* Adjust as needed */
+      width: auto;
+    }
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
     /* Trailer Section */
     .trailer-section {
       padding: 80px 20px;
@@ -298,6 +335,7 @@
       <a href="#boxes">Boxes</a>
       <a href="#more-boxes">More</a>
       <a href="#stats">Stats</a>
+      <a href="#spinning-images">Spinning</a>
       <a href="#trailer">Trailer</a>
     </div>
   </nav>
@@ -330,17 +368,17 @@
   <section id="more-boxes" class="box-container fade-section">
     <div class="box">
       <div class="box-header">
-        <img src="https://static.thenounproject.com/png/4767009-200.png" alt="Placeholder Icon" class="box-icon">
+        <img src="https://static.thenounproject.com/png/4767009-200.png" alt="Fastest Execution Icon" class="box-icon">
         <h3>Fastest Execution</h3>
       </div>
-      <p>With kurrent's low ping method you will get the fastest and smoothest expierence</p>
+      <p>With Kurrent's low ping method you will get the fastest and smoothest experience.</p>
     </div>
     <div class="box">
       <div class="box-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/5966/5966537.png" alt="Placeholder Icon" class="box-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/5966/5966537.png" alt="Stability Icon" class="box-icon">
         <h3>Stability</h3>
       </div>
-      <p>Kurrent has the most stable inf on the market, no crashes for days</p>
+      <p>Kurrent has the most stable infinite on the market—no crashes for days.</p>
     </div>
   </section>
   
@@ -352,6 +390,22 @@
       </div>
       <div class="stats-box">
         <h2>Fastest Infinite Stats</h2>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Spinning Images Section (Marquee) -->
+  <section id="spinning-images" class="fade-section">
+    <div class="image-marquee">
+      <div class="image-track">
+        <!-- Replace these URLs with your desired images -->
+        <img src="https://via.placeholder.com/150x100?text=Image+1" alt="Image 1">
+        <img src="https://via.placeholder.com/150x100?text=Image+2" alt="Image 2">
+        <img src="https://via.placeholder.com/150x100?text=Image+3" alt="Image 3">
+        <!-- Duplicate images for seamless looping -->
+        <img src="https://via.placeholder.com/150x100?text=Image+1" alt="Image 1">
+        <img src="https://via.placeholder.com/150x100?text=Image+2" alt="Image 2">
+        <img src="https://via.placeholder.com/150x100?text=Image+3" alt="Image 3">
       </div>
     </div>
   </section>
