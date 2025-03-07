@@ -221,7 +221,7 @@
     .image-track {
       display: flex;
       gap: 30px;
-      /* Adjust the duration to change the speed (lower = faster) */
+      /* Modified keyframes: translate from 0% to -100% so the track starts at left and scrolls completely */
       animation: marquee 5s linear infinite;
     }
     .image-track img {
@@ -233,7 +233,7 @@
         transform: translateX(0);
       }
       100% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
       }
     }
     
@@ -399,13 +399,13 @@
     <div class="image-marquee">
       <div class="image-track">
         <!-- Replace these URLs with your desired images -->
-        <img src="https://via.placeholder.com/150x100?text=Image+1" alt="Image 1">
-        <img src="https://via.placeholder.com/150x100?text=Image+2" alt="Image 2">
-        <img src="https://via.placeholder.com/150x100?text=Image+3" alt="Image 3">
-        <!-- Duplicate images for seamless looping -->
-        <img src="https://via.placeholder.com/150x100?text=Image+1" alt="Image 1">
-        <img src="https://via.placeholder.com/150x100?text=Image+2" alt="Image 2">
-        <img src="https://via.placeholder.com/150x100?text=Image+3" alt="Image 3">
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000163937062984/IMG_5599.png?ex=67cc8910&is=67cb3790&hm=290efed0751ad13ed642102fb8b84f2ed5c3db1068f00e0dacb615e889295859&=&format=webp&quality=lossless&width=892&height=864" alt="Image 1">
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000164285059204/IMG_5600.png?ex=67cc8910&is=67cb3790&hm=47989ef91867d5d20abac207a00306c1db13aa89bb3e6e35e0fd29ee6f68421e&=&format=webp&quality=lossless" alt="Image 2">
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000366236467271/IMG_5603.png?ex=67cc8940&is=67cb37c0&hm=ee6d53099f9b84b048193a4fce0f40a326615d6c6d969aaaa76673d53ecad6d8&=&format=webp&quality=lossless&width=644&height=968" alt="Image 3">
+        <!-- Duplicate for seamless looping -->
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000163937062984/IMG_5599.png?ex=67cc8910&is=67cb3790&hm=290efed0751ad13ed642102fb8b84f2ed5c3db1068f00e0dacb615e889295859&=&format=webp&quality=lossless&width=892&height=864" alt="Image 1">
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000164285059204/IMG_5600.png?ex=67cc8910&is=67cb3790&hm=47989ef91867d5d20abac207a00306c1db13aa89bb3e6e35e0fd29ee6f68421e&=&format=webp&quality=lossless" alt="Image 2">
+        <img src="https://media.discordapp.net/attachments/1294000041077374976/1294000366236467271/IMG_5603.png?ex=67cc8940&is=67cb37c0&hm=ee6d53099f9b84b048193a4fce0f40a326615d6c6d969aaaa76673d53ecad6d8&=&format=webp&quality=lossless&width=644&height=968" alt="Image 3">
       </div>
     </div>
   </section>
