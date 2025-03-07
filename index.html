@@ -213,6 +213,13 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Divider above and below */
+    .divider {
+      border: none;
+      height: 2px;
+      background: #FF8C00;
+      margin: 20px 0;
+    }
     .image-marquee {
       width: 100%;
       overflow: hidden;
@@ -221,11 +228,11 @@
     .image-track {
       display: flex;
       gap: 30px;
-      /* Modified keyframes: translate from 0% to -100% so the track starts at left and scrolls completely */
+      /* Modified keyframes: translate from 0% to -100% */
       animation: marquee 5s linear infinite;
     }
     .image-track img {
-      height: 100px; /* Adjust as needed */
+      height: 150px; /* Increased size */
       width: auto;
     }
     @keyframes marquee {
@@ -394,6 +401,9 @@
     </div>
   </section>
   
+  <!-- Divider above Spinning Images -->
+  <hr class="divider">
+  
   <!-- Spinning Images Section (Marquee) -->
   <section id="spinning-images" class="fade-section">
     <div class="image-marquee">
@@ -409,6 +419,9 @@
       </div>
     </div>
   </section>
+  
+  <!-- Divider below Spinning Images -->
+  <hr class="divider">
   
   <!-- Trailer Section (Last Section) -->
   <section id="trailer" class="trailer-section fade-section">
