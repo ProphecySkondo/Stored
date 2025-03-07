@@ -97,7 +97,7 @@
       gap: 20px;
       margin: 50px auto;
       padding: 50px 20px;
-      opacity: 0;
+      opacity: 1; /* Loaded on page load via CSS animation */
       animation: contentFadeIn 1s forwards;
       animation-delay: 1.8s;
     }
@@ -155,74 +155,61 @@
       100% { left: 100%; opacity: 0; }
     }
     
-    /* Video Section */
+    /* Additional Boxes Section (More Boxes) */
+    #more-boxes {
+      /* Re-use same container styling as box-container */
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 50px auto;
+      padding: 50px 20px;
+    }
+    
+    /* Trailer Section */
+    .trailer-section {
+      padding: 80px 20px;
+      text-align: center;
+      /* Initial fade-in style for scroll */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .trailer-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .trailer-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .trailer-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #FFA500;
+    }
+    /* Re-use video container styles */
     .video-container {
       width: 90%;
       max-width: 800px;
-      margin: 50px auto;
-      opacity: 0;
-      animation: contentFadeIn 1s forwards;
-      animation-delay: 2s;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
     }
     .video-container iframe {
       width: 100%;
       height: 450px;
       border: none;
-      border-radius: 10px;
     }
     
-    /* Stats Section (Scroll-triggered fade in) */
-    .stats-section {
-      padding: 80px 20px;
+    /* Fade Section Class (for scroll-triggered fade in) */
+    .fade-section {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
-    .stats-section.visible {
+    .fade-section.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-    .stats-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .stats-image img {
-      width: 100%;
-      max-width: 500px;
-      height: 300px; /* Elongated vertically */
-      object-fit: cover;
-      border-radius: 15px;
-    }
-    .stats-box {
-      background-color: #1a1a1a;
-      border: 2px solid #FF8C00;
-      border-radius: 15px;
-      padding: 20px;
-      color: #fff;
-      flex: 1;
-      text-align: center;
-    }
-    
-    /* Contact Section */
-    .contact-section {
-      padding: 100px 20px;
-      text-align: center;
-      opacity: 0;
-      animation: contentFadeIn 1s forwards;
-      animation-delay: 2.2s;
-    }
-    .contact-section h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    .contact-section p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 0 auto;
     }
     
     /* Footer */
@@ -233,7 +220,7 @@
       font-size: 0.9rem;
     }
     
-    /* Fade In Animation for static content */
+    /* Content Fade In (for initial load elements) */
     @keyframes contentFadeIn {
       to { opacity: 1; }
     }
@@ -276,9 +263,8 @@
     <div class="menu">
       <a href="#home">Home</a>
       <a href="#boxes">Boxes</a>
-      <a href="#video">Video</a>
-      <a href="#stats">Stats</a>
-      <a href="#contact">Contact</a>
+      <a href="#more-boxes">More</a>
+      <a href="#trailer">Trailer</a>
     </div>
   </nav>
   
@@ -306,27 +292,34 @@
     </div>
   </section>
   
-  <!-- Video Section -->
-  <div id="video" class="video-container">
-    <iframe src="https://www.youtube.com/embed/klRN5Bp21AY" allowfullscreen></iframe>
-  </div>
-  
-  <!-- Stats Section (Scroll-triggered fade in) -->
-  <section id="stats" class="stats-section">
-    <div class="stats-container">
-      <div class="stats-image">
-        <img src="https://media.discordapp.net/attachments/1346919688663466080/1347658164920778793/egseagdgsge.PNG?ex=67cc9ff8&is=67cb4e78&hm=c4dc9338c1e820e284008c678de4236f3261600cbccba0bcdd7d3f46d2ae04db&=&format=webp&quality=lossless" alt="Fastest Infinite Stats">
+  <!-- More Boxes Section -->
+  <section id="more-boxes" class="box-container fade-section">
+    <div class="box">
+      <div class="box-header">
+        <!-- Replace the src with your desired image -->
+        <img src="https://via.placeholder.com/40" alt="Placeholder Icon" class="box-icon">
+        <h3>Title</h3>
       </div>
-      <div class="stats-box">
-        <h2>Fastest Infinite Stats</h2>
+      <p>description</p>
+    </div>
+    <div class="box">
+      <div class="box-header">
+        <img src="https://via.placeholder.com/40" alt="Placeholder Icon" class="box-icon">
+        <h3>Title</h3>
       </div>
+      <p>description</p>
     </div>
   </section>
   
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <h2>Contact Us</h2>
-    <p>Reach out to learn more about our products and how we can help you.</p>
+  <!-- Trailer Section (Last Section) -->
+  <section id="trailer" class="trailer-section fade-section">
+    <div class="trailer-text">
+      <h2>Wanna take a look?</h2>
+      <h3>Kurrent has a trailer</h3>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/klRN5Bp21AY" allowfullscreen></iframe>
+    </div>
   </section>
   
   <!-- Footer -->
@@ -391,9 +384,9 @@
       });
     });
     
-    // Intersection Observer for scroll fade-in on stats section
+    // Intersection Observer for fade-in sections (.fade-section)
     document.addEventListener("DOMContentLoaded", function() {
-      const scrollElements = document.querySelectorAll('.stats-section');
+      const fadeElements = document.querySelectorAll('.fade-section');
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if(entry.isIntersecting) {
@@ -402,7 +395,7 @@
           }
         });
       }, { threshold: 0.1 });
-      scrollElements.forEach(el => observer.observe(el));
+      fadeElements.forEach(el => observer.observe(el));
     });
   </script>
 </body>
